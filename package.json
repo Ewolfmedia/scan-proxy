@@ -1,0 +1,6 @@
+{
+  "name": "scan-proxy",
+  "version": "1.0.0",
+  "description": "Lightweight proxy for Wolf-Agents security scanning tools",
+  "private": true
+}
