@@ -36,21 +36,13 @@ export default async function handler(request) {
       url = 'https://' + url;
     }
 
-    // Fetch with HEAD first, fallback to GET
-    let response = await fetch(url, {
-      method: 'HEAD',
+    // Always use GET to ensure all headers are returned
+    // (some servers return fewer headers with HEAD)
+    const response = await fetch(url, {
+      method: 'GET',
       redirect: 'follow',
       headers: { 'User-Agent': 'Wolf-Security-Scanner/1.0' },
     });
-
-    // Some servers don't support HEAD
-    if (response.status === 405) {
-      response = await fetch(url, {
-        method: 'GET',
-        redirect: 'follow',
-        headers: { 'User-Agent': 'Wolf-Security-Scanner/1.0' },
-      });
-    }
 
     // Collect headers
     const headers = {};
